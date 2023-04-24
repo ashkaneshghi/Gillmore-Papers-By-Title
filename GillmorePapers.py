@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_chat import message
 
 from langchain.embeddings.base import Embeddings
 from typing import List
@@ -8,7 +7,6 @@ from langchain.vectorstores import FAISS
 
 class LocalHuggingFaceEmbeddings(Embeddings):
     def __init__(self, model_id): 
-        # Should use the GPU by default
         self.model = SentenceTransformer(model_id)
         
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
@@ -59,7 +57,6 @@ st.markdown(" > Powered by -  Gillmore Centre for Financial Technology ")
 # image = Image.open('Sidebar.jpg')
 # st.sidebar.image(image)
 
-# Storing the chat
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
 
@@ -85,12 +82,3 @@ num = get_num()
 # if user_title:
 if st.button('Find'):
     find_similar_paper_n(user_title,user_abstract,num)
-    
-    
-#     st.session_state.past.append(user_input)
-#     st.session_state.generated.append(output1)
-
-# with st.expander("", expanded=True):   
-#     for i in range(len(st.session_state['generated'])-1, -1, -1):
-#         st.info(st.session_state["past"][i])
-#         st.success(st.session_state["generated"][i])
